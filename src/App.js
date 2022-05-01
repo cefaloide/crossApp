@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect, useMemo, useState } from "react";
+import NoSleep from "nosleep.js";
 
 function App() {
+  const [rep, setRep] = useState(0);
+  const noSleep = useMemo(() => new NoSleep(), []);
+
+  const plus = () => {
+    console.log("rep: ", rep);
+    const newRep = rep + 1;
+    setRep(newRep);
+  };
+
+  useEffect(() => {
+    noSleep.enable();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      onClick={plus}
+      style={{
+        background: "lightblue",
+        height: "100vh",
+        fontSize: "20vh",
+        justifyContent: "center",
+        display: "flex",
+        alignItems: "center",
+        MozUserSelect: "none",
+        WebkitUserSelect: "none",
+        msUserSelect: "none",
+      }}
+    >
+      {rep}
     </div>
   );
 }
