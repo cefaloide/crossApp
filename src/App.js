@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     noSleep.enable();
-  }, []);
+  }, [noSleep]);
 
   useEffect(() => {
     localStorage.setItem("rep", rep);
