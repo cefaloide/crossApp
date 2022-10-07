@@ -46,3 +46,34 @@ test("renders number 0 on click reset button", () => {
   fireEvent.click(resetButton);
   expect(screen.getByText(/0/i)).toBeInTheDocument();
 });
+
+test("reset inputInfo", () => {
+  render(<App />);
+  const inputInfo = screen.getByLabelText("inputInfo");
+  fireEvent.change(inputInfo, { target: { value: "25kg" } });
+  expect(inputInfo.value).toBe("25kg");
+
+  const resetTextBtn = screen.getByTestId("resetTextBtn");
+  fireEvent.click(resetTextBtn);
+  expect(inputInfo.value).toBe("");
+});
+
+test("save and show storedInfo", () => {
+  render(<App />);
+  const inputInfo = screen.getByLabelText("inputInfo");
+  fireEvent.change(inputInfo, { target: { value: "25kg" } });
+  expect(inputInfo.value).toBe("25kg");
+
+  const number = screen.getByText(/0/i);
+  fireEvent.click(number);
+  fireEvent.click(number);
+  expect(screen.getByText(/2/i)).toBeInTheDocument();
+
+  const saveBtn = screen.getByText(/save/i);
+  fireEvent.click(saveBtn);
+
+  const showListBtn = screen.getByText("show list");
+  fireEvent.click(showListBtn);
+  expect(screen.getByText(/reps: 2/i)).toBeInTheDocument();
+  expect(screen.getByText(/text: 25kg/i)).toBeInTheDocument();
+});
