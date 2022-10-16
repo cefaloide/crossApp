@@ -1,4 +1,6 @@
+import React from "react";
 import { useInfo } from "../store/context";
+import { StoredInfoType } from "../utils/types";
 
 const ListView = () => {
   const { state, dispatch } = useInfo();
@@ -9,7 +11,7 @@ const ListView = () => {
 
   return (
     <div>
-      {state.storedInfo.map((element, index) => (
+      {state.storedInfo.map((element: StoredInfoType, index: number) => (
         <div key={index}>
           <div>Reps: {element.reps}</div>
           <div>Text: {element.text}</div>

@@ -1,14 +1,18 @@
 import * as React from "react";
 import { LocalSorageValues } from "../utils/constants";
+import { Dispatch, State, ActionType } from "../utils/types";
 
-const CountContext = React.createContext();
+const CountContext = React.createContext<
+  { state: State; dispatch: Dispatch } | undefined
+>(undefined);
+
+const initialStoredInfo = localStorage.getItem(LocalSorageValues.STORED_INFO);
 
 const initialState = {
-  storedInfo:
-    JSON.parse(localStorage.getItem(LocalSorageValues.STORED_INFO)) || [],
+  storedInfo: initialStoredInfo ? JSON.parse(initialStoredInfo) : [],
 };
 
-const reducer = (state, action) => {
+const reducer = (state: State, action: ActionType) => {
   switch (action.type) {
     case "save": {
       return { storedInfo: [...state.storedInfo, action.payload] };
@@ -16,13 +20,14 @@ const reducer = (state, action) => {
     case "reset": {
       return { storedInfo: [] };
     }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
-    }
   }
 };
 
-const InfoProvider = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const InfoProvider = ({ children }: Props) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const value = { state, dispatch };
 
