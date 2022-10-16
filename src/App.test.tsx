@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
 
 import NoSleep from "nosleep.js";
+import React from "react";
 
 jest.spyOn(NoSleep.prototype, "enable").mockImplementation(jest.fn());
 
@@ -49,7 +50,7 @@ test("renders number 0 on click reset button", () => {
 
 test("reset inputInfo", () => {
   render(<App />);
-  const inputInfo = screen.getByLabelText("inputInfo");
+  const inputInfo = screen.getByLabelText("inputInfo") as HTMLInputElement;
   fireEvent.change(inputInfo, { target: { value: "25kg" } });
   expect(inputInfo.value).toBe("25kg");
 
@@ -60,7 +61,7 @@ test("reset inputInfo", () => {
 
 test("save and show storedInfo", () => {
   render(<App />);
-  const inputInfo = screen.getByLabelText("inputInfo");
+  const inputInfo = screen.getByLabelText("inputInfo") as HTMLInputElement;
   fireEvent.change(inputInfo, { target: { value: "25kg" } });
   expect(inputInfo.value).toBe("25kg");
 

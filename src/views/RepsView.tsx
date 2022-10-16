@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useInfo } from "../store/context";
 import { LocalSorageValues } from "../utils/constants";
@@ -6,7 +7,7 @@ const RepsView = () => {
   const { dispatch } = useInfo();
 
   const initialRep = localStorage.getItem(LocalSorageValues.REPS);
-  const [reps, setReps] = useState(parseInt(initialRep) || 0);
+  const [reps, setReps] = useState(initialRep ? parseInt(initialRep) : 0);
 
   const [text, setText] = useState("");
 
@@ -24,16 +25,19 @@ const RepsView = () => {
 
   const saveInfo = () => {
     const dateTime = new Date().toLocaleString();
-    dispatch({ type: "save", payload: { reps, text, dateTime } });
+    dispatch({
+      type: "save",
+      payload: { reps: reps.toString(), text, dateTime },
+    });
     resetReps();
   };
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
   useEffect(() => {
-    localStorage.setItem(LocalSorageValues.REPS, reps);
+    localStorage.setItem(LocalSorageValues.REPS, reps.toString());
   }, [reps]);
 
   return (
