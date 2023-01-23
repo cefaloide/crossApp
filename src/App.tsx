@@ -5,6 +5,7 @@ import { Views } from "./utils/constants";
 import RepsView from "./views/RepsView";
 import ListView from "./views/ListView";
 import { InfoProvider } from "./store/context";
+import { Button } from "./styles/sharedStyles";
 
 function App() {
   const [view, setView] = useState(Views.REPS);
@@ -24,18 +25,9 @@ function App() {
     <InfoProvider>
       {view === Views.REPS && <RepsView />}
       {view === Views.LIST && <ListView />}
-      <div
-        style={{
-          border: "1px solid black",
-          borderRadius: "5px",
-          display: "inline-block",
-          padding: "10px",
-          background: "cornflowerblue",
-        }}
-        onClick={toggleView}
-      >
+      <Button onClick={toggleView}>
         {view === Views.REPS ? "show list" : "show reps"}
-      </div>
+      </Button>
     </InfoProvider>
   );
 }

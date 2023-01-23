@@ -1,5 +1,6 @@
 import React from "react";
 import { useInfo } from "../store/context";
+import { Button } from "../styles/sharedStyles";
 import { StoredInfoType } from "../utils/types";
 
 const ListView = () => {
@@ -19,18 +20,9 @@ const ListView = () => {
           ------
         </div>
       ))}
-      <div
-        style={{
-          border: "1px solid black",
-          borderRadius: "5px",
-          display: "inline-block",
-          padding: "10px",
-          background: "coral",
-        }}
-        onClick={resetInfo}
-      >
+      <Button primary onClick={resetInfo}>
         Reset
-      </div>
+      </Button>
     </div>
   );
 };
