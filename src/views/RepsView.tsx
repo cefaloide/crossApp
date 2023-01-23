@@ -1,6 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useInfo } from "../store/context";
+import {
+  Button,
+  TextInput,
+  RepsWrapper,
+  ResetTextBtn,
+} from "../styles/sharedStyles";
 import { LocalSorageValues } from "../utils/constants";
 
 const RepsView = () => {
@@ -42,68 +48,21 @@ const RepsView = () => {
 
   return (
     <div>
-      <div
-        onClick={plus}
-        style={{
-          background: "lightblue",
-          height: "100vh",
-          fontSize: "20vh",
-          justifyContent: "center",
-          display: "flex",
-          alignItems: "center",
-          MozUserSelect: "none",
-          WebkitUserSelect: "none",
-          msUserSelect: "none",
-        }}
-      >
-        {reps}
-      </div>
+      <RepsWrapper onClick={plus}>{reps}</RepsWrapper>
       <div style={{ display: "flex" }}>
-        <input
+        <TextInput
           aria-label="inputInfo"
           value={text}
           onChange={onChangeInput}
-          style={{ fontSize: "2rem", width: "100%" }}
         />
-        <div
-          style={{
-            border: "2px solid black",
-            borderRadius: "5px",
-            display: "inline-block",
-            padding: "10px",
-            background: "white",
-            fontWeight: "bold",
-          }}
-          onClick={resetText}
-          data-testid="resetTextBtn"
-        >
+        <ResetTextBtn onClick={resetText} data-testid="resetTextBtn">
           X
-        </div>
+        </ResetTextBtn>
       </div>
-      <div
-        style={{
-          border: "1px solid black",
-          borderRadius: "5px",
-          display: "inline-block",
-          padding: "10px",
-          background: "coral",
-        }}
-        onClick={resetReps}
-      >
+      <Button primary onClick={resetReps}>
         Reset
-      </div>
-      <div
-        style={{
-          border: "1px solid black",
-          borderRadius: "5px",
-          display: "inline-block",
-          padding: "10px",
-          background: "cornflowerblue",
-        }}
-        onClick={saveInfo}
-      >
-        Save
-      </div>
+      </Button>
+      <Button onClick={saveInfo}>Save</Button>
     </div>
   );
 };
